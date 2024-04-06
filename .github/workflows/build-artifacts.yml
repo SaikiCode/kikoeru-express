@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - alpha
-      - 'tags/**'
+      - "tags/**"
+    tags:
+      - "v*"
 jobs:
   build-front-end:
     runs-on: ubuntu-latest
@@ -20,19 +22,19 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-      
+
       - run: npm install -g @quasar/cli@2.3.0
       - run: npm ci
       - run: quasar build && quasar build -m pwa
 
-      - name: 'Upload PWA'
+      - name: "Upload PWA"
         uses: actions/upload-artifact@v2
         with:
           name: PWA-alpha
           path: dist/pwa
           if-no-files-found: error
 
-      - name: 'Upload SPA'
+      - name: "Upload SPA"
         uses: actions/upload-artifact@v2
         with:
           name: SPA-alpha
@@ -83,7 +85,7 @@ jobs:
       - name: check node-sqlite3 bindings
         run: echo $(ls node_modules/sqlite3/lib/binding)
 
-      - name: 'Upload bindings'
+      - name: "Upload bindings"
         uses: actions/upload-artifact@v2
         with:
           name: node-${{ matrix.node_version }}-${{ matrix.architecture }}-${{ matrix.os }}-binding
@@ -122,7 +124,7 @@ jobs:
         env:
           archive_name: ${{ matrix.archive_name_prefix }}-${{ steps.source_name.outputs.SOURCE_NAME }}
 
-      - name: 'Prepare release archive'
+      - name: "Prepare release archive"
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.archive_name_prefix }}-${{ steps.source_name.outputs.SOURCE_NAME }}
@@ -146,7 +148,7 @@ jobs:
 
           # - os: macos-10.15
           #   archive_name_prefix: kikoeru-darwin-x64
-          
+
           - os: windows-2019
             archive_name_prefix: kikoeru-win-x64
 
@@ -172,7 +174,7 @@ jobs:
           sleep 10 && cat nohup.out 2>/dev/null &&
           curl --fail -I http://localhost:8888/
           pkill -TERM kikoeru-express
-      
+
       - name: Test pkg binary on Windows
         if: ${{ matrix.os == 'windows-2019' }}
         shell: pwsh
@@ -208,7 +210,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           draft: true
-          files:
-            artifacts/kikoeru-*
+          files: artifacts/kikoeru-*
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
