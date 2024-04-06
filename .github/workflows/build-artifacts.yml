@@ -53,19 +53,19 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # - os: ubuntu-latest
-          #   node_version: 14
-          #   architecture: x64
-          #   pkg_target: node14-linux-x64
-          #   archive_name_prefix: kikoeru-linux-x64
+          - os: ubuntu-latest
+            node_version: 14
+            architecture: x64
+            pkg_target: node14-linux-x64
+            archive_name_prefix: kikoeru-linux-x64
 
-          # - os: macos-10.15
-          #   node_version: 14
-          #   architecture: x64
-          #   pkg_target: node14-macos-x64
-          #   archive_name_prefix: kikoeru-darwin-x64
+          - os: macos-latest
+            node_version: 14
+            architecture: x64
+            pkg_target: node14-macos-x64
+            archive_name_prefix: kikoeru-darwin-x64
 
-          - os: windows-2019
+          - os: windows-latest
             node_version: 14
             architecture: x64
             pkg_target: node14-win-x64
@@ -145,13 +145,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # - os: ubuntu-latest
-          #   archive_name_prefix: kikoeru-linux-x64
+          - os: ubuntu-latest
+            archive_name_prefix: kikoeru-linux-x64
 
-          # - os: macos-10.15
-          #   archive_name_prefix: kikoeru-darwin-x64
+          - os: macos-latest
+            archive_name_prefix: kikoeru-darwin-x64
 
-          - os: windows-2019
+          - os: windows-latest
             archive_name_prefix: kikoeru-win-x64
 
     steps:
@@ -168,7 +168,7 @@ jobs:
         run: ls -al .
 
       - name: Test pkg binary on *nix
-        if: ${{ matrix.os == 'ubuntu-latest' ||  matrix.os == 'macos-10.15' }}
+        if: ${{ matrix.os == 'ubuntu-latest' ||  matrix.os == 'macos-latest' }}
         run: |
           set -e
           chmod +x ./kikoeru-express
@@ -178,7 +178,7 @@ jobs:
           pkill -TERM kikoeru-express
 
       - name: Test pkg binary on Windows
-        if: ${{ matrix.os == 'windows-2019' }}
+        if: ${{ matrix.os == 'windows-latest' }}
         shell: pwsh
         run: |
           $PSVersionTable
