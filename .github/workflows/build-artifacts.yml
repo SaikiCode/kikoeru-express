@@ -13,8 +13,8 @@ jobs:
       - name: Check out latest front end
         uses: actions/checkout@v2
         with:
-          repository: kikoeru-project/kikoeru-quasar
-          ref: unstable
+          repository: SaikiCode/kikoeru-quasar
+          ref: alpha
 
       - name: Setup node
         uses: actions/setup-node@v2
@@ -28,14 +28,14 @@ jobs:
       - name: 'Upload PWA'
         uses: actions/upload-artifact@v2
         with:
-          name: PWA-unstable
+          name: PWA-alpha
           path: dist/pwa
           if-no-files-found: error
 
       - name: 'Upload SPA'
         uses: actions/upload-artifact@v2
         with:
-          name: SPA-unstable
+          name: SPA-alpha
           path: dist/spa
           if-no-files-found: error
 
@@ -90,13 +90,9 @@ jobs:
           path: node_modules/sqlite3/lib/binding
           if-no-files-found: error
 
-      # refs/tags/v1.2.3 => v1.2.3
-      # refs/heads/unstable => unstable
-      # refs/heads/feature/foo => foo
-      # refs/pull/421/merge => merge
       - name: Get branch or tag name
         id: source_name
-        run: echo ::set-output name=SOURCE_NAME::${GITHUB_REF##*/}
+        run: echo echo "SOURCE_NAME=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
 
       - name: Install pkg
         run: npm install -g pkg@4.5.1
@@ -107,7 +103,7 @@ jobs:
       - name: Download front-end artifact (PWA)
         uses: actions/download-artifact@v2
         with:
-          name: PWA-unstable
+          name: PWA-alpha
           path: dist
 
       - name: Check front-end artifacts
@@ -157,7 +153,7 @@ jobs:
     steps:
       - name: Get branch or tag name
         id: source_name
-        run: echo ::set-output name=SOURCE_NAME::${GITHUB_REF##*/}
+        run: echo "SOURCE_NAME=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
 
       - name: Download artifacts
         uses: actions/download-artifact@v2
