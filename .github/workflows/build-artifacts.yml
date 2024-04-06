@@ -2,9 +2,9 @@ name: Build artifacts
 
 on:
   push:
-    branches:
-      - alpha
-      - "tags/**"
+    # branches:
+    #   - alpha
+    #   - "tags/**"
     tags:
       - "v*"
 permissions:
