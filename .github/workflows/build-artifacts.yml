@@ -2,13 +2,8 @@ name: Build artifacts
 
 on:
   push:
-    # branches:
-    #   - alpha
-    #   - "tags/**"
     tags:
       - "v*"
-permissions:
-  contents: write
 jobs:
   build-front-end:
     runs-on: ubuntu-latest
@@ -17,7 +12,7 @@ jobs:
       - name: Check out latest front end
         uses: actions/checkout@v2
         with:
-          repository: SaikiCode/kikoeru-quasar
+          repository: Number178/kikoeru-quasar
           ref: alpha
 
       - name: Setup node

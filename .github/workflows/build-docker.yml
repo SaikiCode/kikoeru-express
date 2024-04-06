@@ -1,9 +1,9 @@
 name: Build docker image and push
 
-on: []
-  # push:
-  #   branches:
-  #     - alpha
+on: 
+  push:
+    branches:
+      - alpha
 
 jobs:
   build-front-end:
