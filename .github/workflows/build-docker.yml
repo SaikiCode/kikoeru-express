@@ -1,6 +1,6 @@
 name: Build docker image and push
 
-on: 
+on:
   push:
     branches:
       - alpha
