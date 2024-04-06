@@ -1,12 +1,9 @@
 name: Build artifacts
 
-on: [] # disable this temporaryly
-# on:
-#   push:
-#     branches-ignore:
-#       - "dependabot/**"
-#     tags:
-#       - v*
+on:
+  push:
+    branches:
+      - alpha
 
 jobs:
   build-front-end:
