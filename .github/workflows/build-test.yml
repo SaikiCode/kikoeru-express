@@ -1,0 +1,14 @@
+name: Output Test
+
+on:
+  push:
+    branches:
+      - alpha
+      - "tags/**"
+jobs:
+  output:
+    runs-on: ubuntu-latest
+    name: Test Output vars
+    steps:
+      - name: output github ref
+        run: echo ${{github.ref}}
