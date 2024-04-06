@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 14
       
-      - run: npm install -g @quasar/cli
+      - run: npm install -g @quasar/cli@2.3.0
       - run: npm ci
       - run: quasar build && quasar build -m pwa
 
