@@ -92,7 +92,7 @@ jobs:
 
       - name: Get branch or tag name
         id: source_name
-        run: echo echo "SOURCE_NAME=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+        run: echo "SOURCE_NAME=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
 
       - name: Install pkg
         run: npm install -g pkg@4.5.1
